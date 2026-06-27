@@ -1,0 +1,32 @@
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Uptime Kuma persistent runtime data
+data/*
+!data/.gitkeep
+
+# Backup archives and restore staging
+backups/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.bak
+
+# Logs and temporary files
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+
+# OS and editor metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.code-workspace

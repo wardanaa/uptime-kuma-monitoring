@@ -1,0 +1,26 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:${UPTIME_KUMA_IMAGE_TAG}
+    container_name: ${UPTIME_KUMA_CONTAINER_NAME}
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      UPTIME_KUMA_PORT: ${UPTIME_KUMA_CONTAINER_PORT}
+    ports:
+      - "${UPTIME_KUMA_HOST_BIND}:${UPTIME_KUMA_HOST_PORT}:${UPTIME_KUMA_CONTAINER_PORT}"
+    volumes:
+      - type: bind
+        source: ${UPTIME_KUMA_DATA_DIR}
+        target: /app/data
+    networks:
+      - uptime-kuma-net
+    healthcheck:
+      test: ["CMD", "node", "extra/healthcheck.js"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  uptime-kuma-net:
+    name: uptime-kuma-net
